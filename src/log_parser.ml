@@ -7,6 +7,7 @@ type token =
   | EOF
 
 open Parsing;;
+let _ = parse_error;;
 # 43 "log_parser.mly"
   open Misc
   open Predicate
@@ -117,7 +118,7 @@ open Parsing;;
   let make_db db = 
      Db.make_db (List.map (fun (s,r) -> Table.make_table s r) db)
 
-# 121 "log_parser.ml"
+# 122 "log_parser.ml"
 let yytransl_const = [|
   257 (* AT *);
   258 (* LPA *);
@@ -255,13 +256,13 @@ let yyact = [|
     Obj.repr(
 # 172 "log_parser.mly"
                                 ( f "signature(list)"; update_preds (_1::_2) )
-# 259 "log_parser.ml"
+# 260 "log_parser.ml"
                : (Db.schema)))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 173 "log_parser.mly"
                                 ( f "signature(end)"; update_preds [] )
-# 265 "log_parser.ml"
+# 266 "log_parser.ml"
                : (Db.schema)))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 3 : string) in
@@ -269,7 +270,7 @@ let yyact = [|
     Obj.repr(
 # 176 "log_parser.mly"
                                 ( f "predicate"; make_predicate _1 _3 )
-# 273 "log_parser.ml"
+# 274 "log_parser.ml"
                : 'predicate))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 2 : string) in
@@ -277,7 +278,7 @@ let yyact = [|
     Obj.repr(
 # 182 "log_parser.mly"
                                 ( f "tsdb(next)"; Some (MFOTL.ts_of_string "Log_parser" _2, make_db _3) )
-# 281 "log_parser.ml"
+# 282 "log_parser.ml"
                : (MFOTL.timestamp * Db.db) option))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 2 : string) in
@@ -285,19 +286,19 @@ let yyact = [|
     Obj.repr(
 # 183 "log_parser.mly"
                                 ( f "tsdb(last)"; Some (MFOTL.ts_of_string "Log_parser" _2, make_db _3) )
-# 289 "log_parser.ml"
+# 290 "log_parser.ml"
                : (MFOTL.timestamp * Db.db) option))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 184 "log_parser.mly"
                                 ( f "tsdb(ts eof)"; None )
-# 295 "log_parser.ml"
+# 296 "log_parser.ml"
                : (MFOTL.timestamp * Db.db) option))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 185 "log_parser.mly"
                                 ( f "tsdb(eof)"; None )
-# 301 "log_parser.ml"
+# 302 "log_parser.ml"
                : (MFOTL.timestamp * Db.db) option))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 1 : 'table) in
@@ -305,13 +306,13 @@ let yyact = [|
     Obj.repr(
 # 188 "log_parser.mly"
                                 ( f "db(list)"; add_table _2 _1 )
-# 309 "log_parser.ml"
+# 310 "log_parser.ml"
                : 'db))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 189 "log_parser.mly"
                                 ( f "db()"; [] )
-# 315 "log_parser.ml"
+# 316 "log_parser.ml"
                : 'db))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 1 : string) in
@@ -319,7 +320,7 @@ let yyact = [|
     Obj.repr(
 # 192 "log_parser.mly"
                                 ( f "table"; make_table _1 _2 )
-# 323 "log_parser.ml"
+# 324 "log_parser.ml"
                : 'table))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 1 : 'tuple) in
@@ -327,20 +328,20 @@ let yyact = [|
     Obj.repr(
 # 195 "log_parser.mly"
                                 ( f "relation(list)"; _1::_2 )
-# 331 "log_parser.ml"
+# 332 "log_parser.ml"
                : 'relation))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 196 "log_parser.mly"
                                 ( f "relation(end)"; [] )
-# 337 "log_parser.ml"
+# 338 "log_parser.ml"
                : 'relation))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 1 : 'fields) in
     Obj.repr(
 # 199 "log_parser.mly"
                                 ( f "tuple"; _2 )
-# 344 "log_parser.ml"
+# 345 "log_parser.ml"
                : 'tuple))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : string) in
@@ -348,20 +349,20 @@ let yyact = [|
     Obj.repr(
 # 203 "log_parser.mly"
                                ( f "fields(list)"; _1::_3 )
-# 352 "log_parser.ml"
+# 353 "log_parser.ml"
                : 'fields))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : string) in
     Obj.repr(
 # 204 "log_parser.mly"
                              ( f "fields(end)"; [_1] )
-# 359 "log_parser.ml"
+# 360 "log_parser.ml"
                : 'fields))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 205 "log_parser.mly"
                           ( f "fields()"; [] )
-# 365 "log_parser.ml"
+# 366 "log_parser.ml"
                : 'fields))
 (* Entry signature *)
 ; (fun __caml_parser_env -> raise (Parsing.YYexit (Parsing.peek_val __caml_parser_env 0)))

@@ -32,6 +32,7 @@ type token =
   | EOF
 
 open Parsing;;
+let _ = parse_error;;
 # 43 "formula_parser.mly"
   open Predicate
   open MFOTL
@@ -96,7 +97,7 @@ open Parsing;;
 	  )      
 	| _ -> failwith "[Formula_parser.check] internal error"
     in f
-# 100 "formula_parser.ml"
+# 101 "formula_parser.ml"
 let yytransl_const = [|
   257 (* LPA *);
   258 (* RPA *);
@@ -336,14 +337,14 @@ let yyact = [|
     Obj.repr(
 # 133 "formula_parser.mly"
                                         ( f "f()"; _2 )
-# 340 "formula_parser.ml"
+# 341 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : 'predicate) in
     Obj.repr(
 # 134 "formula_parser.mly"
                                         ( f "f(pred)"; Pred _1)
-# 347 "formula_parser.ml"
+# 348 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : 'term) in
@@ -351,7 +352,7 @@ let yyact = [|
     Obj.repr(
 # 135 "formula_parser.mly"
                                         ( f "f(eq)"; check (Equal (_1,_3)) )
-# 355 "formula_parser.ml"
+# 356 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : 'term) in
@@ -359,7 +360,7 @@ let yyact = [|
     Obj.repr(
 # 136 "formula_parser.mly"
                                         ( f "f(eq)"; check (Less (_1,_3)) )
-# 363 "formula_parser.ml"
+# 364 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : MFOTL.formula) in
@@ -367,7 +368,7 @@ let yyact = [|
     Obj.repr(
 # 137 "formula_parser.mly"
                                         ( f "f(<=>)"; Equiv (_1,_3) )
-# 371 "formula_parser.ml"
+# 372 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : MFOTL.formula) in
@@ -375,7 +376,7 @@ let yyact = [|
     Obj.repr(
 # 138 "formula_parser.mly"
                                         ( f "f(=>)"; Implies (_1,_3) )
-# 379 "formula_parser.ml"
+# 380 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : MFOTL.formula) in
@@ -383,7 +384,7 @@ let yyact = [|
     Obj.repr(
 # 139 "formula_parser.mly"
                                         ( f "f(or)"; Or (_1,_3) )
-# 387 "formula_parser.ml"
+# 388 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : MFOTL.formula) in
@@ -391,21 +392,21 @@ let yyact = [|
     Obj.repr(
 # 140 "formula_parser.mly"
                                         ( f "f(and)"; And (_1,_3) )
-# 395 "formula_parser.ml"
+# 396 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 0 : MFOTL.formula) in
     Obj.repr(
 # 141 "formula_parser.mly"
                                         ( f "f(card)"; Card (_2) )
-# 402 "formula_parser.ml"
+# 403 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 0 : MFOTL.formula) in
     Obj.repr(
 # 142 "formula_parser.mly"
                                         ( f "f(not)"; Neg (_2) )
-# 409 "formula_parser.ml"
+# 410 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 2 : 'varlist) in
@@ -413,7 +414,7 @@ let yyact = [|
     Obj.repr(
 # 143 "formula_parser.mly"
                                         ( f "f(ex)"; exists _2 _4 )
-# 417 "formula_parser.ml"
+# 418 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 2 : 'varlist) in
@@ -421,7 +422,7 @@ let yyact = [|
     Obj.repr(
 # 144 "formula_parser.mly"
                                         ( f "f(fa)"; forall _2 _4 )
-# 425 "formula_parser.ml"
+# 426 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 1 : 'interval) in
@@ -429,14 +430,14 @@ let yyact = [|
     Obj.repr(
 # 145 "formula_parser.mly"
                                         ( f "f(prev)"; Prev (_2,_3) )
-# 433 "formula_parser.ml"
+# 434 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 0 : MFOTL.formula) in
     Obj.repr(
 # 146 "formula_parser.mly"
                                         ( f "f(prevdf)"; Prev (dfintv,_2) )
-# 440 "formula_parser.ml"
+# 441 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 1 : 'interval) in
@@ -444,14 +445,14 @@ let yyact = [|
     Obj.repr(
 # 147 "formula_parser.mly"
                                         ( f "f(next)"; Next (_2,_3) )
-# 448 "formula_parser.ml"
+# 449 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 0 : MFOTL.formula) in
     Obj.repr(
 # 148 "formula_parser.mly"
                                         ( f "f(nextdf)"; Next (dfintv,_2) )
-# 455 "formula_parser.ml"
+# 456 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 1 : 'interval) in
@@ -459,7 +460,7 @@ let yyact = [|
     Obj.repr(
 # 149 "formula_parser.mly"
                                         ( f "f(ev)"; Eventually (_2,_3) )
-# 463 "formula_parser.ml"
+# 464 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 1 : 'interval) in
@@ -467,14 +468,14 @@ let yyact = [|
     Obj.repr(
 # 150 "formula_parser.mly"
                                         ( f "f(once)"; Once (_2,_3) )
-# 471 "formula_parser.ml"
+# 472 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 0 : MFOTL.formula) in
     Obj.repr(
 # 151 "formula_parser.mly"
                                         ( f "f(oncedf)"; Once (dfintv,_2) )
-# 478 "formula_parser.ml"
+# 479 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 1 : 'interval) in
@@ -482,7 +483,7 @@ let yyact = [|
     Obj.repr(
 # 152 "formula_parser.mly"
                                         ( f "f(always)"; Always (_2,_3) )
-# 486 "formula_parser.ml"
+# 487 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 1 : 'interval) in
@@ -490,14 +491,14 @@ let yyact = [|
     Obj.repr(
 # 153 "formula_parser.mly"
                                         ( f "f(palways)"; PastAlways (_2,_3) )
-# 494 "formula_parser.ml"
+# 495 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 0 : MFOTL.formula) in
     Obj.repr(
 # 154 "formula_parser.mly"
                                         ( f "f(palwaysdf)"; PastAlways (dfintv,_2) )
-# 501 "formula_parser.ml"
+# 502 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 3 : MFOTL.formula) in
@@ -506,7 +507,7 @@ let yyact = [|
     Obj.repr(
 # 155 "formula_parser.mly"
                                         ( f "f(since)"; Since (_3,_1,_4) )
-# 510 "formula_parser.ml"
+# 511 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : MFOTL.formula) in
@@ -514,7 +515,7 @@ let yyact = [|
     Obj.repr(
 # 156 "formula_parser.mly"
                                         ( f "f(sincedf)"; Since (dfintv,_1,_3) )
-# 518 "formula_parser.ml"
+# 519 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 3 : MFOTL.formula) in
@@ -523,7 +524,7 @@ let yyact = [|
     Obj.repr(
 # 157 "formula_parser.mly"
                                         ( f "f(until)"; Until (_3,_1,_4) )
-# 527 "formula_parser.ml"
+# 528 "formula_parser.ml"
                : MFOTL.formula))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : 'lbound) in
@@ -531,61 +532,61 @@ let yyact = [|
     Obj.repr(
 # 161 "formula_parser.mly"
                               ( f "interval"; (_1,_3) )
-# 535 "formula_parser.ml"
+# 536 "formula_parser.ml"
                : 'interval))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 0 : 'units) in
     Obj.repr(
 # 164 "formula_parser.mly"
                               ( f "opened lbound"; OBnd _2 )
-# 542 "formula_parser.ml"
+# 543 "formula_parser.ml"
                : 'lbound))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 0 : 'units) in
     Obj.repr(
 # 165 "formula_parser.mly"
                               ( f "closed lbound"; CBnd _2 )
-# 549 "formula_parser.ml"
+# 550 "formula_parser.ml"
                : 'lbound))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 1 : 'units) in
     Obj.repr(
 # 168 "formula_parser.mly"
                               ( f "opened rbound"; OBnd _1 )
-# 556 "formula_parser.ml"
+# 557 "formula_parser.ml"
                : 'rbound))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 1 : 'units) in
     Obj.repr(
 # 169 "formula_parser.mly"
                               ( f "closed rbound"; CBnd _1 )
-# 563 "formula_parser.ml"
+# 564 "formula_parser.ml"
                : 'rbound))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 170 "formula_parser.mly"
                               ( f "no bound(1)"; Inf )
-# 569 "formula_parser.ml"
+# 570 "formula_parser.ml"
                : 'rbound))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 171 "formula_parser.mly"
                               ( f "no bound(2)"; Inf )
-# 575 "formula_parser.ml"
+# 576 "formula_parser.ml"
                : 'rbound))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : int*char) in
     Obj.repr(
 # 174 "formula_parser.mly"
                               ( f "ts";  timeunits _1 )
-# 582 "formula_parser.ml"
+# 583 "formula_parser.ml"
                : 'units))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : float) in
     Obj.repr(
 # 175 "formula_parser.mly"
                               ( f "int"; _1 )
-# 589 "formula_parser.ml"
+# 590 "formula_parser.ml"
                : 'units))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 3 : 'pred) in
@@ -594,49 +595,49 @@ let yyact = [|
 # 179 "formula_parser.mly"
                                  ( f "p()"; 
 				    Predicate.make_predicate (_1,_3) )
-# 598 "formula_parser.ml"
+# 599 "formula_parser.ml"
                : 'predicate))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : string) in
     Obj.repr(
 # 183 "formula_parser.mly"
                               ( f "pred"; _1 )
-# 605 "formula_parser.ml"
+# 606 "formula_parser.ml"
                : 'pred))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : 'var) in
     Obj.repr(
 # 187 "formula_parser.mly"
                               ( f "term(var)"; Var _1 )
-# 612 "formula_parser.ml"
+# 613 "formula_parser.ml"
                : 'term))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : 'str_sb) in
     Obj.repr(
 # 188 "formula_parser.mly"
                               ( f "term(cst.str)"; Cst (get_cst _1) )
-# 619 "formula_parser.ml"
+# 620 "formula_parser.ml"
                : 'term))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : float) in
     Obj.repr(
 # 189 "formula_parser.mly"
                               ( f "term(cst.num)"; Cst (Int (int_of_float _1)) )
-# 626 "formula_parser.ml"
+# 627 "formula_parser.ml"
                : 'term))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 1 : string) in
     Obj.repr(
 # 192 "formula_parser.mly"
                               ( f "str_sb([str])"; "[" ^ _2 ^ "]" )
-# 633 "formula_parser.ml"
+# 634 "formula_parser.ml"
                : 'str_sb))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : string) in
     Obj.repr(
 # 193 "formula_parser.mly"
                               ( f "str_sb(str)"; _1 )
-# 640 "formula_parser.ml"
+# 641 "formula_parser.ml"
                : 'str_sb))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : 'term) in
@@ -644,20 +645,20 @@ let yyact = [|
     Obj.repr(
 # 196 "formula_parser.mly"
                               ( f "termlist(list)"; _1 :: _3 )
-# 648 "formula_parser.ml"
+# 649 "formula_parser.ml"
                : 'termlist))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : 'term) in
     Obj.repr(
 # 197 "formula_parser.mly"
                             ( f "termlist(end)"; [_1] )
-# 655 "formula_parser.ml"
+# 656 "formula_parser.ml"
                : 'termlist))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 198 "formula_parser.mly"
                         ( f "termlist()"; [] )
-# 661 "formula_parser.ml"
+# 662 "formula_parser.ml"
                : 'termlist))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 2 : 'varlist) in
@@ -665,27 +666,27 @@ let yyact = [|
     Obj.repr(
 # 201 "formula_parser.mly"
                               ( f "varlist(list)"; _1 @ [_3] )
-# 669 "formula_parser.ml"
+# 670 "formula_parser.ml"
                : 'varlist))
 ; (fun __caml_parser_env ->
     let _1 = (Parsing.peek_val __caml_parser_env 0 : 'var) in
     Obj.repr(
 # 202 "formula_parser.mly"
                            ( f "varlist(end)"; [_1] )
-# 676 "formula_parser.ml"
+# 677 "formula_parser.ml"
                : 'varlist))
 ; (fun __caml_parser_env ->
     Obj.repr(
 # 203 "formula_parser.mly"
                         ( f "varlist()"; [] )
-# 682 "formula_parser.ml"
+# 683 "formula_parser.ml"
                : 'varlist))
 ; (fun __caml_parser_env ->
     let _2 = (Parsing.peek_val __caml_parser_env 0 : string) in
     Obj.repr(
 # 206 "formula_parser.mly"
                              ( f "var"; _2 )
-# 689 "formula_parser.ml"
+# 690 "formula_parser.ml"
                : 'var))
 (* Entry formula *)
 ; (fun __caml_parser_env -> raise (Parsing.YYexit (Parsing.peek_val __caml_parser_env 0)))

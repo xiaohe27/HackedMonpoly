@@ -2,7 +2,8 @@ OCAMLOPT = ocamlopt
 OCAMLC = ocamlc
 
 # Set here which complier will be used
-OCAML = $(OCAMLOPT)
+#OCAML = $(OCAMLOPT)
+OCAML = $(OCAMLC)
 # FLAGS = -p
 
 ifeq "$(OCAML)" "$(OCAMLOPT)"
@@ -53,8 +54,8 @@ monpoly: .depend $(OBJ) version.ml main.ml
 monpoly.cma: .depend $(OBJC)
 	$(OCAMLC) $(FLAGS) -a $(OBJC) -o $@
 
-monpoly.cmxa: .depend $(OBJX)
-	$(OCAMLOPT) $(FLAGS) -a $(OBJX) -o $@
+#monpoly.cmxa: .depend $(OBJX)
+#	$(OCAMLOPT) $(FLAGS) -a $(OBJX) -o $@
 
 
 # update version with the latest revision number

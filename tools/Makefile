@@ -2,7 +2,8 @@ OCAMLOPT = ocamlopt
 OCAMLC = ocamlc
 
 # Set here which complier will be used
-OCAML = $(OCAMLOPT)
+#OCAML = $(OCAMLOPT)
+OCAML = $(OCAMLC)
 
 FLAGS = -I ../src
 

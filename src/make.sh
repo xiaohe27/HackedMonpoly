@@ -47,6 +47,7 @@ ocamlc -c  log.ml
 ocamlc -c  sliding.mli
 ocamlc -c  sliding.ml 
 
+ocamlc -c algorithm.mli
 ocamlc -c algorithm.ml
 
 

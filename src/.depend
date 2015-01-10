@@ -44,7 +44,7 @@ filter_empty_tp.cmo : predicate.cmi misc.cmi MFOTL.cmi filter_empty_tp.cmi
 filter_empty_tp.cmx : predicate.cmx misc.cmx MFOTL.cmx filter_empty_tp.cmi
 sliding.cmo : misc.cmi MFOTL.cmi sliding.cmi
 sliding.cmx : misc.cmx MFOTL.cmx sliding.cmi
-log.cmo : misc.cmi MFOTL.cmi log_parser.cmi log_lexer.cmx \
+log.cmo : misc.cmi MFOTL.cmi log_parser.cmi log_lexer.cmo \
     filter_empty_tp.cmi db.cmi log.cmi
 log.cmx : misc.cmx MFOTL.cmx log_parser.cmx log_lexer.cmx \
     filter_empty_tp.cmx db.cmx log.cmi
